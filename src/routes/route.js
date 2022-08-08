@@ -10,12 +10,78 @@ router.get('/test-me', function (req, res) {
     res.send('My second ever api!')
 });
 
-router.get('/students', function (req, res){
+router.get('/students', function (req, res) {
     let students = ['Sabiha', 'Neha', 'Akash']
     res.send(students)
 })
+router.get('/movies', function (req, res) {
+    let movies = ['Rang de basanti', 'The shining', 'Lord of the rings', ' Batman begins']
+    res.send(movies)
 
-router.get('/student-details/:name', function(req, res){
+})
+router.get('/movies/:indexNumber', function (req, res) {
+    let movies = ['Rang de basanti', 'The shining', 'Lord of the rings', ' Batman begins'];
+    let request = req.params;
+    
+    let index = request.indexNumber;
+     index=Number(index);
+    console.log(index )
+    console.log(typeof(index));
+    if (index >= movies.length || index<0) {
+        res.send('invalid index')
+    }
+    else {
+        res.send(movies[index])
+    }
+})
+
+router.get('/films',function(req,res){
+    let films=[ {
+        'id': 1,
+        'name': 'The Shining'
+       }, {
+        'id': 2,
+        'name': 'Incendies'
+       }, {
+        'id': 3,
+        'name': 'Rang de Basanti'
+       }, {
+        'id': 4,
+        'name': 'Finding Nemo'
+       }]
+       res.send(films)
+})
+
+router.get('/films/:filmId',function(req,res){
+    let films=[ {
+        'id': 1,
+        'name': 'The Shining'
+       }, {
+        'id': 2,
+        'name': 'Incendies'
+       }, {
+        'id': 3,
+        'name': 'Rang de Basanti'
+       }, {
+        'id': 4,
+        'name': 'Finding Nemo'
+       }]
+    let info=req.params;
+    console.log(info )
+    let id=info.filmId;
+    console.log(id )
+     id=Number(id);
+     console.log(id )
+     console.log(typeof(id));
+     if(id >4 || id<1){
+       res.send('No movie exists with this id' );
+     }
+     else{
+        res.send(films[id-1]) 
+     }
+
+})
+router.get('/student-details/:name', function (req, res) {
     /*
     params is an attribute inside request that contains 
     dynamic values.
@@ -28,10 +94,10 @@ router.get('/student-details/:name', function(req, res){
 
     // JSON strigify function helps to print an entire object
     // We can use any ways to print an object in Javascript, JSON stringify is one of them
-    console.log("This is the request "+ JSON.stringify(requestParams))
+    console.log("This is the request " + JSON.stringify(requestParams))
     let studentName = requestParams.name
     console.log('Name of the student is ', studentName)
-    
+
     res.send('Dummy response')
 })
 
