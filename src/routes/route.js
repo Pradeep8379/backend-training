@@ -2,19 +2,61 @@ const express = require('express');
 const abc = require('../introduction/intro')
 const router = express.Router();
 
-router.get('/test-me', function (req, res) {
-    console.log('My batch is', abc.name)
-    abc.printName()
-    res.send('My second ever api!')
+let players =
+    [
+        {
+            "name": "manish",
+            "dob": "1/1/1995",
+            "gender": "male",
+            "city": "jalandhar",
+            "sports": [
+                "swimming"
+            ]
+        },
+        {
+            "name": "gopal",
+            "dob": "1/09/1995",
+            "gender": "male",
+            "city": "delhi",
+            "sports": [
+                "soccer"
+            ]
+        },
+        {
+            "name": "lokesh",
+            "dob": "1/1/1990",
+            "gender": "male",
+            "city": "mumbai",
+            "sports": [
+                "soccer"
+            ]
+        },
+    ]
+
+router.post('/players', function (req, res) {
+    
+    let newname = req.body.name;
+    
+    num = 0;
+    for (let i = 0; i < players.length; i++) {
+        let data = players[i];
+        
+
+        if (data.name === newname) {
+            let num = 1;
+            res.send('Try different name')
+        }
+
+    }
+    if (num == 0) {
+        players.push(req.body)
+
+    }
+
+    res.send(players)
 });
 
 
-router.get('/test-you', function(req, res){
-    res.send('This is the second routes implementation')
-})
 
-router.get('/give-me-students-data',function(req, res){
-
-})
 module.exports = router;
 // adding this comment for no reason
