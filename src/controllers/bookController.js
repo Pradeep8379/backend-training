@@ -8,8 +8,33 @@ const createBook= async function (req, res) {
     res.send({msg: savedData})
 }
 
-const getBooksData= async function (req, res) {
+const getBooksList= async function (req, res) {
+    let allUsers= await BookModel.find().select({bookName:1,authorName:1})
+    res.send({msg: allUsers})
 
+}
+
+const getBooksYear= async function (req, res) {
+    let data=req.query
+    let allUsers= await BookModel.find(data)
+    res.send({msg: allUsers})
+
+}
+
+const getParticularData= async function (req, res) {
+    let data=req.query
+    let allUsers= await BookModel.find(data)
+    res.send({msg: allUsers})
+
+}
+
+
+const getXINRBooks= async function (req, res) {
+   
+    let allUsers= await BookModel.find({ $or:[{pricesindianPrice:100},{prices.indianPrice:200},{prices.indianPrice:500}]}).select({prices:1})
+    res.send({msg: allUsers})
+
+}
     // let allBooks= await BookModel.find( ).count() // COUNT
 
     // let allBooks= await BookModel.find( { authorName : "Chetan Bhagat" , isPublished: true  } ) // AND
@@ -65,21 +90,24 @@ const getBooksData= async function (req, res) {
     
     // ASYNC AWAIT
     
-    let a= 2+4
-    a= a + 10
-    console.log(a)
-    let allBooks= await BookModel.find( )  //normally this is an asynchronous call..but await makes it synchronous
+//     let a= 2+4
+//     a= a + 10
+//     console.log(a)
+//     let allBooks= await BookModel.find( )  //normally this is an asynchronous call..but await makes it synchronous
 
 
-    // WHEN AWAIT IS USED: - database + axios
-    //  AWAIT can not be used inside forEach , map and many of the array functions..BE CAREFUL
-    console.log(allBooks)
-    let b = 14
-    b= b+ 10
-    console.log(b)
-    res.send({msg: allBooks})
-}
+//     // WHEN AWAIT IS USED: - database + axios
+//     //  AWAIT can not be used inside forEach , map and many of the array functions..BE CAREFUL
+//     console.log(allBooks)
+//     let b = 14
+//     b= b+ 10
+//     console.log(b)
+//     res.send({msg: allBooks})
+// }
 
 
 module.exports.createBook= createBook
-module.exports.getBooksData= getBooksData
+module.exports.getBooksList= getBooksList
+module.exports.getBooksYear= getBooksYear
+module.exports.getParticularData= getParticularData
+module.exports.getXINRBooks=getXINRBooks
