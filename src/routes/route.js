@@ -22,5 +22,7 @@ router.post("/getParticularData", BookController.getParticularData)
 
 router.get("/getXINRBooks", BookController.getXINRBooks)
 
+router.get("/getRandomBooks", BookController.getRandomBooks)
+
 
 module.exports = router;
