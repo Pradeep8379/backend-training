@@ -20,7 +20,7 @@ const createBook= async function (req, res) {
 }
 
 const getAllDetails = async function (req, res) {
-    let specificBook = await bookModel.find().populate(['author','publisher name'])
+    let specificBook = await bookModel.find().populate(['author','publisher '])
     res.send({data: specificBook})
 
 }
