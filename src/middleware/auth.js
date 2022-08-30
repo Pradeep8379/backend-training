@@ -1,32 +1,25 @@
 const jwt = require("jsonwebtoken");
 const authenticate = function (req, res, next) {
-    //check the token in request header
-
-    let token = req.headers["x-Auth-token"];
-    if (!token) token = req.headers["x-auth-token"];
-
-
-
-    if (!token) return res.send({ status: false, msg: "token must be present in the request header" })
-    //validate this token
     try {
+        let token = req.headers["x-Auth-token"];
+        if (!token) token = req.headers["x-auth-token"];
+        if (!token) return res.status(401).send({ msg: "token must be present in the request header" })
         let decodedToken = jwt.verify(token, 'functionup-plutonium')
         req["token"] = decodedToken.userId;
+        next()
+
     }
-    catch (err) { return res.send({ status: false, msg: "token is not valid" }) }
-    //  req["token"]=decodedToken.userId;
-    next()
+    catch (err) { return res.status(500).send({ msg: "server error or token is not valid " }) }
+ 
 }
 
-
 const authorise = function (req, res, next) {
-    // comapre the logged in user's id and the id in request
-    let userToBeModified = req.params.userId
-    //userId for the logged-in user
+   try{ let userToBeModified = req.params.userId
     let userLoggedIn = req["token"];
-    if (userToBeModified != userLoggedIn) return res.send({ status: false, msg: 'User logged is not allowed to modify the requested users data' })
-
+    if (userToBeModified != userLoggedIn) return res.status(403).send({ msg: 'User logged is not allowed to modify the requested users data' })
     next()
+   }
+   catch(err){ return res.status(500).send({ msg: "server issue" })}
 }
 module.exports.authenticate = authenticate;
 module.exports.authorise = authorise;
