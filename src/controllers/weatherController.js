@@ -44,7 +44,9 @@ const sortByTemp = async function(req,res){
             }
 
             const result = await axios(options);
-            cityData.push({city:cities[i], temp:result.data.main.temp})
+            cityData.push({city:cities[i], temp:result["data"]["main"]["temp"]})
+            // [] or . both work
+            // cityData.push({city:cities[i], temp:result.data.main.temp})
         }
         let sortedCity = cityData.sort((a,b) => {
             return a.temp - b.temp
