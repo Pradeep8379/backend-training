@@ -1,27 +1,30 @@
 {
   "name": "plutonium",
   "version": "1.0.0",
-  "description": "repository for backend cohort - Plutonium",
-  "main": "index.js",
+  "description": "realTime chatBox with rooms",
+  "main": "server.js",
   "scripts": {
-    "start": "nodemon src/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server",
+    "dev": "nodemon app.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sabihak89/plutonium.git"
+    "url": "git+https://github.com/Pradeep8379/backend-training.git"
   },
   "author": "Pradeep Patil",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/sabihak89/plutonium/issues"
   },
   "homepage": "https://github.com/sabihak89/plutonium#readme",
   "dependencies": {
-    "bcrypt": "^5.1.0",
-    "express": "^4.17.1",
-    "jsonwebtoken": "^8.5.1",
-    "mongoose": "^6.0.12",
-    "nodemon": "^2.0.15"
+    "express": "^4.18.2",
+    "moment": "^2.29.4",
+    "node-cron": "^3.0.2",
+    "nodemailer": "^6.9.1",
+    "socket.io": "^4.5.4"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
   }
 }
