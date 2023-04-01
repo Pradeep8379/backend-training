@@ -46,6 +46,13 @@ const dateToCron = (date) => {
 
 const dateText = '2023-04-01 14:48:00';
 const date = new Date(dateText);
+const seconds = date.getSeconds();
+const minutes = date.getMinutes();
+const hours = date.getHours();
+const days = date.getDate();
+const months = date.getMonth() + 1;
+const dayOfWeek = date.getDay();
+console.log(date,seconds,minutes,hours,days,months,dayOfWeek);
 
 const newCron = dateToCron(date);
 console.log(newCron); //3
