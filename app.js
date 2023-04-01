@@ -11,16 +11,16 @@ const sendEmail = async (req,res) => {
         const transporter = nodemailer.createTransport({
             service: "Gmail",
             auth: {
-                user: 'pradeeppatil8379@gmail.com',
+                user: 'your mail',
                 pass: 'app-password'
             }
         })
 
         const option = {
-            from: 'pradeeppatil8379@gmail.com',
-            to: 'pradeeppatil3912@gmail.com',
-            subject: "Checking Subject",
-            text: 'Checking text'
+            from: 'your mail',
+            to: 'receivers mail',
+            subject: "Subject",
+            text: ' text'
         }
 
         transporter.sendMail(option, function (err, info) {
