@@ -1,11 +1,11 @@
 const express = require('express');
 const app = express();
 const nodemailer = require('nodemailer');
-const cron = require('node-cron')
+
 const PORT = 5000;
 
 
-const sendEmail = async (req,res) => {
+const sendEmail = async (req, res) => {
     try {
 
         const transporter = nodemailer.createTransport({
@@ -33,7 +33,7 @@ const sendEmail = async (req,res) => {
         res.status(400).send({ status: false, message: error.massage })
     }
 }
-
+const cron = require('node-cron')
 const dateToCron = (date) => {
     const minutes = date.getMinutes();
     const hours = date.getHours();
@@ -43,26 +43,34 @@ const dateToCron = (date) => {
 
     return `${minutes} ${hours} ${days} ${months} ${dayOfWeek}`;
 };
+// "2023-05-06 12:50"
 
-const dateText = '2023-04-01 14:48:00';
+const dateText = '2023-04-02 15:40:00';
 const date = new Date(dateText);
-const seconds = date.getSeconds();
-const minutes = date.getMinutes();
-const hours = date.getHours();
-const days = date.getDate();
-const months = date.getMonth() + 1;
-const dayOfWeek = date.getDay();
-console.log(date,seconds,minutes,hours,days,months,dayOfWeek);
+// const seconds = date.getSeconds();
+// const minutes = date.getMinutes();
+// const hours = date.getHours();
+// const days = date.getDate();
+// const months = date.getMonth() + 1;
+// const dayOfWeek = date.getDay();
+// console.log(date,seconds,minutes,hours,days,months,dayOfWeek);
 
 const newCron = dateToCron(date);
-console.log(newCron); //3
+// console.log(newCron); //3
 
-// const task=()=>{
-// console.log('cron job!');
-// }
 
-cron.schedule(newCron,sendEmail)
 
+// cron.schedule(newCron, task(1))
+
+
+const task = (a,b) => {
+    console.log(a+b);
+}
+function scheduler(fido) {
+    cron.schedule(newCron, () => task(1,2));
+   
+}
+scheduler();
 // app.get('/',sendEmail)
 //-----------------------------------forgetPassword--------------------
 // const forgetPassword = async (req, res) => {
